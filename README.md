@@ -7,7 +7,7 @@ A robust FastAPI backend that powers a multimodal similarity search engine for a
 - **Authentication**: OAuth2 with Password Flow for secure API access
 - **Bulk Image Processing**: Upload and process multiple images with automatic embedding generation
 - **Similarity Search**: Find similar artworks using vector similarity search
-- **Vector Database**: SQLite with vector search capabilities for efficient similarity queries
+- **Vector Database**: Weaviate with vector search capabilities for efficient similarity queries
 - **RESTful API**: Well-documented endpoints with automatic OpenAPI/Swagger documentation
 - **CORS Support**: Configured for frontend integration
 
