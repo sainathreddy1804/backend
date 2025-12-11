@@ -14,7 +14,7 @@ A robust FastAPI backend that powers a multimodal similarity search engine for a
 ## Technology Stack
 
 - **Framework**: FastAPI
-- **Database**: SQLite with sqlite-vec extension
+- **Database**: Weaviate
 - **Image Processing**: Pillow (PIL)
 - **Authentication**: JWT tokens with bcrypt password hashing
 - **Vector Embeddings**: Placeholder functions (ready for integration with CLIP, DINOv2, etc.)
