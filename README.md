@@ -1,6 +1,6 @@
 # AI-Powered Art and Design Style Search Application
 
-A robust FastAPI backend that powers a multimodal similarity search engine for art and design styles. This application provides API endpoints for user authentication, bulk image processing, and similarity search using a vector-enabled SQLite database.
+A robust FastAPI backend that powers a multimodal similarity search engine for art and design styles. This application provides API endpoints for user authentication, bulk image processing, and similarity search using a Weaviate database.
 
 ## Features
 
@@ -168,7 +168,7 @@ Check API health status.
 
 ## Vector Search Extension
 
-The application uses the `sqlite-vec` extension for efficient vector similarity search. This extension provides:
+The application uses the Weaviate for efficient vector similarity search. This extension provides:
 
 - **Vector Storage**: Efficient storage of high-dimensional vectors using virtual tables
 - **Similarity Search**: Fast cosine similarity calculations with built-in distance functions
@@ -179,43 +179,6 @@ The application uses the `sqlite-vec` extension for efficient vector similarity 
 
 All embeddings are **512-dimensional** vectors, which is a common size for many pre-trained models like CLIP, DINOv2, and other vision transformers.
 
-### sqlite-vec Features
-
-The application leverages sqlite-vec's advanced features:
-
-- **Virtual Tables**: Uses `vec0` virtual table for efficient vector storage
-- **Distance Functions**: Utilizes `vec_distance_cosine()` for similarity calculations
-- **Automatic Indexing**: Built-in vector indexing for fast similarity searches
-- **Fallback Support**: Graceful degradation to manual similarity calculation if extension fails
-
-Example sqlite-vec usage:
-```python
-import sqlite3
-import sqlite_vec
-
-db = sqlite3.connect("artworks.db")
-db.enable_load_extension(True)
-sqlite_vec.load(db)
-db.enable_load_extension(False)
-
-# Create vector table
-db.execute("""
-    CREATE VIRTUAL TABLE artworks_vectors USING vec0(
-        style_embedding float[512],
-        texture_embedding float[512],
-        palette_embedding float[512],
-        emotion_embedding float[512]
-    )
-""")
-
-# Perform similarity search
-results = db.execute("""
-    SELECT *, vec_distance_cosine(style_embedding, ?) as distance
-    FROM artworks_vectors
-    ORDER BY distance
-    LIMIT 10
-""", (query_vector,)).fetchall()
-```
 
 ## CORS Configuration
 
